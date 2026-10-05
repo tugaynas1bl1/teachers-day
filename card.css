@@ -6,6 +6,7 @@
 
 body {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +44,8 @@ body {
     cursor: pointer;
     transform-origin: center center;
     animation: cardEnter 1.5s ease-out forwards;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 @keyframes cardEnter {
@@ -71,6 +74,8 @@ body {
     }
 }
 
+/* ---------- Açıq kart (içəridəki hissə) ---------- */
+
 .open-card {
     position: absolute;
     inset: 0;
@@ -84,6 +89,9 @@ body {
     border-radius: 18px;
     overflow: hidden;
     z-index: 1;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .inner-border {
@@ -218,6 +226,8 @@ body {
     font-weight: 600;
 }
 
+/* ---------- Bağlı kart (üz qapağı) ---------- */
+
 .closed-card {
     position: absolute;
     inset: 0;
@@ -227,10 +237,14 @@ body {
     border-radius: 18px;
     overflow: hidden;
     transform-origin: top center;
-    transform-style: preserve-3d;
-    transition:
-        transform 1.3s cubic-bezier(0.65, 0, 0.35, 1);
+    transform: translateZ(1px);
+    /* açıq kartın qarşısında dayansın */
+    will-change: transform;
+    /* qatı əvvəlcədən hazırlayır, flaşı azaldır */
+    -webkit-backface-visibility: hidden;
+    /* Safari üçün */
     backface-visibility: hidden;
+    transition: transform 1.3s cubic-bezier(0.65, 0, 0.35, 1);
     cursor: pointer;
 }
 
@@ -274,8 +288,11 @@ body {
     transition: left 1s ease;
 }
 
-.closed-card:hover .card-shine {
-    left: 150%;
+/* Hover yalnız siçanı olan cihazlarda (telefonda ilişməsin) */
+@media (hover: hover) and (pointer: fine) {
+    .closed-card:hover .card-shine {
+        left: 150%;
+    }
 }
 
 .closed-content {
@@ -352,9 +369,12 @@ body {
     }
 }
 
+/* Kart açılanda */
 .card.open .closed-card {
-    transform: rotateX(-180deg);
+    transform: translateZ(1px) rotateX(-180deg);
 }
+
+/* ---------- Responsiv ---------- */
 
 @media (max-width: 950px) {
     .scene {

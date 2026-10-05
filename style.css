@@ -70,9 +70,9 @@ h1 {
 
 #mail-img {
     position: absolute;
-    margin-right: calc(6 * var(--u));
+    margin-right: calc(5 * var(--u));
     cursor: pointer;
-    width: calc(600 * var(--u));
+    width: calc(340 * var(--u));
     bottom: calc(300 * var(--u));
 }
 
@@ -111,11 +111,11 @@ button:hover {
 
     0%,
     100% {
-        transform: translateY(calc(300 * var(--u))) scale(1);
+        transform: translateY(calc(280 * var(--u))) scale(1);
     }
 
     50% {
-        transform: translateY(calc(300 * var(--u))) scale(1.08);
+        transform: translateY(calc(280 * var(--u))) scale(1.08);
     }
 }
 
@@ -148,7 +148,7 @@ button:hover {
     }
 
     to {
-        transform: translateY(calc(300 * var(--u)));
+        transform: translateY(calc(280 * var(--u)));
     }
 }
 

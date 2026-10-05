@@ -1,0 +1,493 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at 20% 20%,
+            rgba(96, 165, 250, 0.2),
+            transparent 30%),
+        radial-gradient(circle at 80% 80%,
+            rgba(129, 140, 248, 0.2),
+            transparent 30%),
+        linear-gradient(135deg,
+            #08111f,
+            #101c30,
+            #172554);
+    font-family: Georgia, "Times New Roman", serif;
+    overflow: hidden;
+}
+
+.scene {
+    width: 900px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    position: relative;
+    width: 900px;
+    height: 600px;
+    perspective: 1800px;
+    border-radius: 18px;
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transform-origin: center center;
+    animation: cardEnter 1.5s ease-out forwards;
+}
+
+@keyframes cardEnter {
+    0% {
+        transform: rotateZ(8deg) scale(0.55);
+    }
+
+    25% {
+        transform: rotateZ(6deg) scale(0.65);
+    }
+
+    50% {
+        transform: rotateZ(-3deg) scale(0.78);
+    }
+
+    70% {
+        transform: rotateZ(1.5deg) scale(0.88);
+    }
+
+    85% {
+        transform: rotateZ(-0.5deg) scale(0.93);
+    }
+
+    100% {
+        transform: rotateZ(0deg) scale(0.95);
+    }
+}
+
+.open-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg,
+            #172a46,
+            #203b62,
+            #13243e);
+    border-radius: 18px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.inner-border {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(217, 199, 162, 0.5);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.open-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 65px 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.occasion {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: #f0d27a;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.open-content h2 {
+    font-size: 38px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.divider span {
+    flex: 1;
+    height: 1px;
+    background:
+        linear-gradient(90deg,
+            transparent,
+            #d4af5a);
+}
+
+.divider span:last-child {
+    background:
+        linear-gradient(90deg,
+            #d4af5a,
+            transparent);
+}
+
+.divider b {
+    color: #f0d27a;
+    font-size: 18px;
+}
+
+.main-message {
+    max-width: 680px;
+    font-size: 23px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.main-message strong {
+    color: #f0d27a;
+    font-weight: 600;
+}
+
+.message {
+    max-width: 680px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.quote {
+    max-width: 600px;
+    margin: 18px 0;
+    padding: 14px 30px;
+    border-left: 2px solid #d4af5a;
+    border-right: 2px solid #d4af5a;
+    color: #f0d27a;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 500;
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.wish {
+    max-width: 650px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 18px;
+    font-weight: 400;
+}
+
+.signature {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+}
+
+.signature strong {
+    font-size: 23px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.closed-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border-radius: 18px;
+    overflow: hidden;
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    transition:
+        transform 1.3s cubic-bezier(0.65, 0, 0.35, 1);
+    backface-visibility: hidden;
+    cursor: pointer;
+}
+
+.card-cover-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+    z-index: 1;
+}
+
+.closed-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.30),
+            rgba(0, 0, 0, 0.70));
+    z-index: 2;
+    pointer-events: none;
+}
+
+.card-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transform: skewX(-20deg);
+    z-index: 4;
+    pointer-events: none;
+    transition: left 1s ease;
+}
+
+.closed-card:hover .card-shine {
+    left: 150%;
+}
+
+.closed-content {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+}
+
+.small-decoration {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #e7c978;
+}
+
+.small-title {
+    font-size: 14px;
+    letter-spacing: 6px;
+    margin-bottom: 22px;
+    color: #f5df9c;
+}
+
+.closed-content h1 {
+    font-size: 52px;
+    line-height: 1.15;
+    font-weight: 500;
+    color: white;
+}
+
+.gold-line {
+    width: 130px;
+    height: 1px;
+    margin: 25px 0;
+    background: #e3c56e;
+}
+
+.click-text {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.arrow {
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    color: #e3c56e;
+    animation: arrowMove 1.5s infinite;
+}
+
+@keyframes arrowMove {
+    0% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(7px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+}
+
+.card.open .closed-card {
+    transform: rotateX(-180deg);
+}
+
+@media (max-width: 950px) {
+    .scene {
+        width: 90vw;
+        height: 60vw;
+    }
+
+    .card {
+        width: 90vw;
+        height: 60vw;
+    }
+
+    .open-content {
+        padding: 40px 60px;
+    }
+
+    .open-content h2 {
+        font-size: 32px;
+    }
+
+    .main-message {
+        font-size: 19px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .wish {
+        font-size: 13px;
+    }
+
+    .closed-content h1 {
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        overflow: auto;
+    }
+
+    .scene {
+        width: 92vw;
+        height: 130vw;
+        min-height: 500px;
+    }
+
+    .card {
+        width: 92vw;
+        height: 130vw;
+        min-height: 500px;
+    }
+
+    .open-content {
+        padding: 35px 30px;
+    }
+
+    .inner-border {
+        inset: 12px;
+    }
+
+    .occasion {
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+    }
+
+    .open-content h2 {
+        font-size: 25px;
+        margin-bottom: 12px;
+    }
+
+    .divider {
+        width: 180px;
+        margin-bottom: 15px;
+    }
+
+    .main-message {
+        font-size: 16px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    .message {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 6px;
+    }
+
+    .quote {
+        font-size: 12px;
+        padding: 8px 15px;
+        margin: 10px 0;
+    }
+
+    .wish {
+        font-size: 11px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    .signature {
+        font-size: 11px;
+    }
+
+    .signature strong {
+        font-size: 18px;
+    }
+
+    .closed-content h1 {
+        font-size: 32px;
+    }
+
+    .small-title {
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .small-decoration {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .gold-line {
+        margin: 18px 0;
+    }
+
+    .click-text {
+        font-size: 11px;
+    }
+
+    .arrow {
+        font-size: 20px;
+    }
+}
